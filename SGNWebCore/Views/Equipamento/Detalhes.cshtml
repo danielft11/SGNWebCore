@@ -1,0 +1,123 @@
+﻿@model EquipamentosAddEdit
+
+@{
+    ViewData["Title"] = "Detalhes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid meu_container">
+    <div>
+        <div class="cliente_imagem_titulo">
+            @if (Model.TipoEquipamentoNome.Equals("Computador"))
+            {
+                <img src="~/images/computer.png" style="width:100%" />
+            }
+            @if (Model.TipoEquipamentoNome.Equals("Impressora"))
+            {
+                <img src="~/images/impressora.png" style="width:100%" />
+            }
+            @if (Model.TipoEquipamentoNome.Equals("Notebook"))
+            {
+                <img src="~/images/notebook.png" style="width:100%" />
+            }
+        </div>
+        <div class="cliente_titulo">
+            <h3>@Model.Modelo</h3>
+        </div>
+    </div>
+</div>
+
+<main>
+    <form class="container-fluid" role="form" asp-action="Detalhes" method="post">
+
+        <input type="hidden" asp-for="Id" />
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="form-group">
+                    <label asp-for="Marca" class="control-label"></label>
+                    <input asp-for="Marca" class="form-control" />
+                    <span asp-validation-for="Marca" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="form-group">
+                    <label asp-for="Modelo" class="control-label"></label>
+                    <input asp-for="Modelo" class="form-control" />
+                    <span asp-validation-for="Modelo" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                <div class="form-group">
+                    <label asp-for="NumSerie" class="control-label"></label>
+                    <input asp-for="NumSerie" class="form-control" />
+                    <span asp-validation-for="NumSerie" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <div class="form-group">
+                    <label asp-for="Descricao" class="control-label"></label>
+                    <input asp-for="Descricao" class="form-control" />
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <div class="form-group">
+                    <label asp-for="TipoEquipamentoId" class="control-label"></label>
+                    <select asp-for="TipoEquipamentoId" asp-items="@ViewBag.TipoEquipamento" class="form-control">
+                        <option>Selecione</option>
+                    </select>
+                    <span asp-validation-for="TipoEquipamentoNome" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <div class="form-group">
+                    <label asp-for="ClienteId" class="control-label"></label>
+                    <select asp-for="ClienteId" asp-items="@ViewBag.Cliente" class="form-control">
+                        <option>Selecione</option>
+                    </select>
+                    <span asp-validation-for="ClienteId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="modal fade" id="detalhes_ModalExclusao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="delModalLabel">EXCLUSÃO</h4>
+                            </div>
+                            <div class="modal-body">
+                                Confirma a exclusão do equipamento <strong>@Model.Modelo - S/N @Model.NumSerie</strong> ?
+                            </div>
+                            <div class="modal-footer">
+                                <button id="detalhes_botaoConfirmaExclusao" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Sim, excluir.</button>
+                                <button class="btn btn-info" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>@*Linha do Modal Exluir*@
+
+        <footer class="form-group">
+            <button class="btn btn-success">GRAVAR</button>
+            <button id="detalhes_botaoExcluir" class="btn btn-danger">EXCLUIR</button>
+        </footer>
+
+    </form>
+</main>
+
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
+
+@section Scripts{
+    <script src="~/js/equipamento_js/equipamentoDetalhes.js"></script>
+}

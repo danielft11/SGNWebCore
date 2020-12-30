@@ -1,0 +1,96 @@
+﻿@model List<EquipamentosGet>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Equipamentos</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="table table-responsive" style="display:block;">
+            <div>
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <th style="color:White; background-color:#666666; white-space:nowrap">ID:</th>
+                            <th style="color:White; background-color:#666666; white-space:nowrap">Marca:</th>
+                            <th style="color:White; background-color:#666666; white-space:nowrap">Modelo:</th>
+                            <th style="color:White; background-color:#666666; white-space:nowrap">N/S:</th>
+                            <th style="color:White; background-color:#666666; white-space:nowrap">Tipo:</th>
+                            <th style="color:White;background-color:#666666;white-space:nowrap;">Cliente:</th>
+                            <th style="color:White; background-color:#666666; white-space:nowrap">Ações:</th>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="linhas">
+                                <td class="Id" style="white-space:nowrap;">@item.Id</td>
+                                <td style="white-space:nowrap;">@item.Marca</td>
+                                <td class="hidden-xs hidden-sm hidden-md" style="white-space:nowrap">@item.Modelo</td>
+                                <td class="hidden-xs hidden-sm hidden-md" style="white-space:nowrap">@item.NumSerie</td>
+                                <td class="hidden-xs hidden-sm hidden-md" style="white-space:nowrap">@item.TipoEquipamentoNome</td>
+                                <td class="hidden-xs hidden-sm hidden-md" style="white-space:nowrap">@item.ClienteNome</td>
+                                <td style="white-space:nowrap;">
+                                    @Html.ActionLink("Detalhes", "Detalhes", new { @item.Id }, new { @class = "btn btn-info btn-xs" }) |
+                                    <button id="index_botaoExcluir" data-id="@item.Id" class="btn btn-danger btn-xs botoes">Excluir</button>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12"><a asp-action="Novo" class="btn btn-success">NOVO EQUIPAMENTO</a></div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="modal fade" id="index_ModalExclusao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="delModalLabel">Deletar Registro</h4>
+                    </div>
+                    <div class="modal-body">
+                        Tem certeza que deseja excluir este registro?
+                    </div>
+                    <div class="modal-footer">
+                        <button id="index_botaoConfirmaExclusao" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Remover</button>
+                        <button class="btn btn-info" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>@*Linha do Modal Exluir*@
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="modal fade" id="index_InfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="index_InfoModalTitle"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="index_InfoModalText"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="index_botaoFecharModalInformacoes" class="btn btn-info" data-dismiss="modal" aria-hidden="true">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>@*Modal de informações de retorno*@
+
+@section Scripts{
+    <script src="~/js/equipamento_js/equipamentoIndex.js"></script>
+}
+

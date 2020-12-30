@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<h1 style="text-align:center">DASHBOARD</h1>
+<div class="col-md-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title" style="text-align:center">Clientes Cadastrados</h2>
+        </div>
+        <div class="panel-body">
+            <a asp-controller="Cliente" asp-action="Index"><p style="text-align:center">@ViewBag.TotalClientes</p></a>
+        </div>
+    </div>
+</div>
+
+
+

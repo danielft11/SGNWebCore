@@ -1,0 +1,301 @@
+﻿@model SGNWebCore.WebApi.Models.ClienteAddEdit
+
+
+@{
+    ViewData["Title"] = "Detalhes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section HeadScripts{
+    <script src="~/js/jquery.maskedinput-1.3.min.js"></script>
+}
+
+<div class="container-fluid meu_container">
+    <div class="cliente_imagem_titulo">
+        <img src="~/images/cliente.png" style="width:100%" />
+    </div>
+    <div class="cliente_titulo">
+        <h3>@Model.Nome</h3>
+    </div>
+</div>
+<form class="container-fluid" role="form" asp-action="Detalhes" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row">
+        <div class="form-group col-md-2 col-sm-2">
+            <label asp-for="TipoCliente" class="control-label"></label>
+            <select asp-for="TipoCliente" asp-items="Html.GetEnumSelectList<TipoCliente>()" class="form-control">
+                <option>Selecione</option>
+            </select>
+            <span asp-validation-for="TipoCliente" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4 col-sm-4">
+            <label asp-for="Nome" class="control-label"></label>
+            <input asp-for="Nome" class="form-control" />
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3 col-sm-3">
+            <label asp-for="Telefone" class="control-label"></label>
+            <input asp-for="Telefone" id="Telefone" class="form-control" />
+            <span asp-validation-for="Telefone" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3 col-sm-3">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group col-md-3 col-sm-3">
+            <label asp-for="CelPrincipal" class="control-label"></label>
+            <input asp-for="CelPrincipal" id="Celular" class="form-control" />
+            <span asp-validation-for="CelPrincipal" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3 col-sm-3">
+            <label asp-for="CPF" class="control-label"></label>
+            <input asp-for="CPF" id="CPF" class="form-control" />
+            <span asp-validation-for="CPF" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3 col-sm-3">
+            <label asp-for="RG" class="control-label"></label>
+            <input asp-for="RG" class="form-control" />
+            <span asp-validation-for="RG" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3 col-sm-3">
+            <label asp-for="Sexo" class="control-label"></label>
+            <select asp-for="Sexo" asp-items="Html.GetEnumSelectList<Sexo>()" class="form-control">
+                <option>Selecione</option>
+            </select>
+            <span asp-validation-for="Sexo" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group col-md-3 col-sm-3">
+            <label asp-for="CNPJ" class="control-label"></label>
+            <input asp-for="CNPJ" id="CNPJ" class="form-control" />
+            <span asp-validation-for="CNPJ" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3 col-sm-3">
+            <label asp-for="RazaoSocial" class="control-label"></label>
+            <input asp-for="RazaoSocial" id="RazaoSocial" class="form-control" />
+            <span asp-validation-for="RazaoSocial" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3 col-sm-3">
+            <label asp-for="InscEstadual" class="control-label"></label>
+            <input asp-for="InscEstadual" id="InscEstadual" class="form-control" />
+            <span asp-validation-for="InscEstadual" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3 col-sm-3">
+            <label asp-for="Endereco.CEP" class="control-label"></label>
+            <input asp-for="Endereco.CEP" id="CEP" class="form-control" />
+            <span asp-validation-for="Endereco.CEP" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group col-md-5 col-sm-5">
+            <label asp-for="Endereco.Logradouro" class="control-label"></label>
+            <input asp-for="Endereco.Logradouro" id="logradouro" class="form-control" />
+            <span asp-validation-for="Endereco.Logradouro" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-2 col-sm-2">
+            <label asp-for="Endereco.Numero" class="control-label"></label>
+            <input asp-for="Endereco.Numero" id="numero" class="form-control" />
+            <span asp-validation-for="Endereco.Numero" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-5 col-sm-5">
+            <label asp-for="Endereco.Complemento" class="control-label"></label>
+            <input asp-for="Endereco.Complemento" id="complemento" class="form-control" />
+            <span asp-validation-for="Endereco.Complemento" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group col-md-5 col-sm-5">
+            <label asp-for="Endereco.Bairro" class="control-label"></label>
+            <input asp-for="Endereco.Bairro" id="bairro" class="form-control" />
+            <span asp-validation-for="Endereco.Bairro" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-5 col-sm-5">
+            <label asp-for="Endereco.Cidade" class="control-label"></label>
+            <input asp-for="Endereco.Cidade" id="cidade" class="form-control" />
+            <span asp-validation-for="Endereco.Cidade" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-2 col-sm-2">
+            <label asp-for="Endereco.Estado" class="control-label"></label>
+            <input asp-for="Endereco.Estado" id="estado" class="form-control" />
+            <span asp-validation-for="Endereco.Estado" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group col-md-12 col-sm-12">
+            <label asp-for="Observacoes" class="control-label"></label>
+            <textarea asp-for="Observacoes" class="form-control" cols="100" rows="3"></textarea>
+            <span asp-validation-for="Observacoes" class="text-danger"></span>
+        </div>
+    </div>
+   
+    <div class="panel panel-default">
+        <div class="panel-heading">Equipamentos do cliente:</div>
+        <div class="panel-body" style="padding: 10px">
+            @if (Model.Equipamentos.Count > 0)
+            {
+                <div>
+                    <table class="table table-responsive">
+                        <tbody>
+                            <tr>
+                                <th style="white-space:nowrap">Marca:</th>
+                                <th style="white-space:nowrap">Modelo:</th>
+                                <th style="white-space:nowrap">N/S:</th>
+                                <th style="white-space:nowrap">Ação:</th>
+                            </tr>
+                            @foreach (var item in Model.Equipamentos)
+                            {
+                                <tr class="linhas">
+                                    <td style="white-space:nowrap;">@item.Marca</td>
+                                    <td style="white-space:nowrap;">@item.Modelo</td>
+                                    <td style="white-space:nowrap">@item.NumSerie</td>
+                                    <td style="white-space:nowrap">
+                                        <button class="btn btn-primary btn-xs botoesDetalhes"
+                                                data-id="@item.Id"
+                                                data-marca="@item.Marca"
+                                                data-modelo="@item.Modelo"
+                                                data-ns="@item.NumSerie"
+                                                data-descricao="@item.Descricao"
+                                                data-tipoequipamentoid="@item.TipoEquipamento.Id"
+                                                data-tipoequipamentonome="@item.TipoEquipamento.Nome"
+                                                data-opcao="edicao">
+                                            Editar
+                                        </button> |
+                                        <button data-id="@item.Id" class="btn btn-danger btn-xs botoesExcluir">Excluir</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p style="text-align:center">Cliente sem equipamentos cadastrados.</p>
+            }
+        </div>
+        <div class="panel-footer" style="padding: 5px">
+            <button class="btn btn-primary"
+                    data-opcao="inclusao"
+                    onclick="novoEquipamento('inclusao')">
+                Novo
+            </button>
+        </div>
+    </div>@*Equipamentos do cliente*@
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="modal fade bs-example-modal-lg" id="detalhes_ModalEquipamento" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="delModalEquipamentoLabel">Detalhes do equipamento</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-2 col-sm-2">
+                                    <div class="form-group">
+                                        <label class="control-label">Marca</label>
+                                        <input id="marca" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Modelo</label>
+                                        <input id="modelo" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+                                    <div class="form-group">
+                                        <label class="control-label">N/S:</label>
+                                        <input id="numSerie" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Tipo</label>
+                                        <select id="tipoEquipamento" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Descrição</label>
+                                        <textarea id="descricao" rows="3" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="botaoSalvarEquipamento" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" onclick="salvarEquipamento()">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>@*Modal detalhes do equipamentos*@
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="modal fade" id="modalExclusaoEquipamento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="delModalLabel">EXCLUSÃO DE EQUIPAMENTO</h4>
+                        </div>
+                        <div class="modal-body">
+                            Confirma a exclusão deste equipamento?
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true" onclick="excluirEquipamento()">Sim, excluir.</button>
+                            <button class="btn btn-info" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>@*Modal exluir equipamento*@
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="modal fade" id="detalhes_ModalExclusao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="delModalLabel">EXCLUSÃO</h4>
+                        </div>
+                        <div class="modal-body">
+                            Confirma a exclusão deste cliente?
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true" onclick="excluirCliente()">Sim, excluir.</button>
+                            <button class="btn btn-info" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>@*Modal exluir cliente*@
+
+    <footer class="form-group">
+        <button class="btn btn-success">GRAVAR</button>
+        <button class="btn btn-danger" onclick="modalExclusaoCliente()">EXCLUIR</button>
+    </footer>
+
+</form>
+
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
+
+@section Scripts{
+    <script src="~/js/cliente_js/clienteDetalhes.js"></script>
+    <script src="~/js/remover-mascaras-campos.js"></script>
+}

@@ -1,0 +1,35 @@
+﻿/*.responsive-font {
+    font-size: 1.5em;
+}*/
+
+.meu_container {
+    background-color: #6bb1b3;
+    padding-top: 5px;
+    margin-bottom: 20px
+}
+
+.cliente_imagem_titulo {
+    width: 64px;
+    height: 64px;
+    display: inline;
+    float: left;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.cliente_titulo {
+    display: inline;
+    float: left;
+    margin-top: 5px;
+}
+
+#titulo {
+    border-bottom: 1px solid;
+    border-bottom-color: #CCCCCC;
+    margin-bottom: 20px;
+}
+
+#lkBtnCalcular{
+    margin-right: 2px;
+}

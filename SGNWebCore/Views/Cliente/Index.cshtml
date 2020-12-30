@@ -1,0 +1,127 @@
+﻿@model List<SGNWebCore.WebApi.Models.ClientesGet>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Clientes</h2>
+
+<form asp-controller="Cliente" asp-action="Index" method="get">
+    <div class="row">
+        <div class="col-md-8 col-sm-8">
+            <a asp-action="Novo" class="btn btn-success">NOVO CLIENTE</a>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="nome" placeholder="Buscar por nome">
+                    <span class="input-group-btn">
+                        <button id="btnBuscaCliente" class="btn btn-info">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@*Formulário de busca de clientes*@
+
+<div class="row">
+    <div class="col-md-12">
+        @if (Model.Count > 0)
+        {
+            <div class="table table-responsive" style="display:block;">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th style="color:White; background-color:#666666; white-space:nowrap">Nome:</th>
+                                <th style="color:White; background-color:#666666; white-space:nowrap">Tipo:</th>
+                                <th class="hidden-xs hidden-sm hidden-md" style="color:White; background-color:#666666; white-space:nowrap">Endereço:</th>
+                                <th style="color:White; background-color:#666666; white-space:nowrap">Ações:</th>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="linhas">
+                                    @{
+                                        var endereco = @item.Endereco.Logradouro;
+                                        var numero = @item.Endereco.Numero;
+                                        var complemento = @item.Endereco.Complemento;
+                                        var bairro = @item.Endereco.Bairro;
+                                        var cidade = @item.Endereco.Cidade;
+                                        var estado = @item.Endereco.Estado;
+
+                                        var enderecoFinal = "";
+
+                                        if (string.IsNullOrEmpty(complemento))
+                                            enderecoFinal = endereco + ", " + numero + ", " + bairro + ", " + cidade + ", " + estado;
+                                        else
+                                            enderecoFinal = endereco + ", " + numero + ", " + complemento + ", " + bairro + ", " + cidade + ", " + estado;
+                                    }
+                                    <td style="white-space:nowrap;">@item.Nome</td>
+                                    <td class="Id" style="white-space:nowrap;">@item.TipoCliente</td>
+                                    <td class="hidden-xs hidden-sm hidden-md" style="white-space:nowrap">@enderecoFinal</td>
+                                    <td style="white-space:nowrap;">
+                                        @Html.ActionLink("Detalhes", "Detalhes", new { @item.Id }, new { @class = "btn btn-info btn-xs" }) |
+                                        <button id="index_botaoExcluir" data-id="@item.Id" class="btn btn-danger btn-xs botoes">Excluir</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+            </div>
+        }
+        else
+        {
+            <h3>Nenhum cliente cadastrado até o momento.</h3>
+        }
+
+    </div>
+</div>@*Linha do grid*@
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="modal fade" id="index_ModalExclusao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="delModalLabel">Deletar Registro</h4>
+                    </div>
+                    <div class="modal-body">
+                        Tem certeza que deseja excluir este registro?
+                    </div>
+                    <div class="modal-footer">
+                        <button id="index_botaoConfirmaExclusao" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Remover</button>
+                        <button class="btn btn-info" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>@*Linha do modal excluir*@
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="modal fade" id="index_InfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="index_InfoModalTitle"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="index_InfoModalText"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="index_botaoFecharModalInformacoes" class="btn btn-info" data-dismiss="modal" aria-hidden="true">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>@*Modal de informações de retorno*@
+
+@section Scripts{
+    <script src="~/js/MessageResponse.js"></script>
+    <script src="~/js/cliente_js/clienteIndex.js"></script>    
+}
