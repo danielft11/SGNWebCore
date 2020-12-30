@@ -17,6 +17,7 @@ namespace SGNWebCore.HttpClients
         {
             _httpClient = httpClient;
             _accessor = accessor;
+            //Teste commit.
         }
 
         public async Task<IList<ClientesGet>> GetClientesAsync()
