@@ -58,6 +58,9 @@ namespace SGNWebCore.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            if (!string.IsNullOrEmpty(model.Sexo) && model.Sexo.Equals("Selecione"))
+                model.Sexo = null;
+
             var data = model.ToCliente();
             _clienteRepository.Adicionar(data);
 

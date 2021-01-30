@@ -12,7 +12,7 @@ namespace SGNWebCore.WebApi.Models
         public string Nome { get; set; }
         public string CPF { get; set; }
         public string RG { get; set; }
-        public Sexo Sexo { get; set; }
+        public string Sexo { get; set; }
 
         [JsonProperty(PropertyName = "Celular principal")]
         public string CelPrincipal { get; set; }
@@ -57,8 +57,6 @@ namespace SGNWebCore.WebApi.Models
 
         public Cliente AtualizarCliente(ClienteAddEdit model, Cliente cliente)
         {
-            cliente.Endereco = new Endereco();
-
             cliente.Nome = model.Nome;
             cliente.CPF = model.CPF;
             cliente.RG = model.RG;

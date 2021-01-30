@@ -18,7 +18,7 @@ namespace SGNWebCore.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var tiposDeEquipamentos = (await _tipoEquipamentoRepository.ObterTodosAsync());
+            var tiposDeEquipamentos = await _tipoEquipamentoRepository.ObterTodosAsync();
             return Ok(tiposDeEquipamentos);
         }
     }

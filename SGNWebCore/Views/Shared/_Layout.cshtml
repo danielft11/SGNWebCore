@@ -13,76 +13,75 @@
     @RenderSection("HeadScripts", required: false)
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="pull-left" href="#">
-                        <img src="~/images/logo_sgn2.png" />
-                    </a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-left">
-                        <li class="active">
-                            <a asp-controller="Home">Home<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastros<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a asp-controller="Cliente" asp-action="Index">Clientes</a></li>
-                                <li><a asp-controller="Equipamento" asp-action="Index">Equipamentos</a></li>
-                                <li><a href="#">Serviços</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Processos<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Ordens de Serviço - OS</a></li>
-                                <li><a href="#">Orçamentos</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Relatórios<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Equipamentos </a></li>
-                                <li><a href="#">Clientes - Sintético </a></li>
-                                <li><a href="#">Clientes - Analítico </a></li>
-                                <li><a href="#">Ocorrências </a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li>
-                                <form method="post" asp-action="Logout" asp-controller="Account">
-                                    <button class="btn btn-info" type="submit">Logout @User.Identity.Name</button>
-                                </form>
-                            </li>
-
-                        }
-                        else
-                        {
-                            <li><a asp-controller="Account" asp-action="Register">Register</a></li>
-                            <li><a asp-controller="Account" asp-action="Login">Login</a></li>
-                        }
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container -->
-        </nav>
-
-    </header>
-
     <div class="container">
+        <header>
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="pull-left" href="#">
+                            <img src="~/images/logo_sgn2.png" />
+                        </a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li class="active">
+                                <a asp-controller="Home">Home<span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastros<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-controller="Cliente" asp-action="Index">Clientes</a></li>
+                                    <li><a asp-controller="Equipamento" asp-action="Index">Equipamentos</a></li>
+                                    <li><a href="#">Serviços</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Processos<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Ordens de Serviço - OS</a></li>
+                                    <li><a href="#">Orçamentos</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Relatórios<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Equipamentos </a></li>
+                                    <li><a href="#">Clientes - Sintético </a></li>
+                                    <li><a href="#">Clientes - Analítico </a></li>
+                                    <li><a href="#">Ocorrências </a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li>
+                                    <form method="post" asp-action="Logout" asp-controller="Account">
+                                        <button class="btn btn-info" type="submit">Logout @User.Identity.Name</button>
+                                    </form>
+                                </li>
+
+                            }
+                            else
+                            {
+                                <li><a asp-controller="Account" asp-action="Register">Register</a></li>
+                                <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                            }
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container -->
+            </nav>
+
+        </header>
         <main role="main" class="container-fluid" style="margin-top: 60px">
             <div class="row">
                 <div class="col-md-12">
@@ -90,9 +89,8 @@
                 </div>
             </div>
         </main>
-    </div>
-
-    <footer>
+        <!--
+        <footer>
         <div class="row">
             <div class="col-md-12">
                 <h5 class="text-center">SGN WEB Core versão 2.000 - 2019 - Todos os direitos reservados</h5>
@@ -100,7 +98,8 @@
             </div>
         </div>
     </footer>
-
+    -->
+    </div>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

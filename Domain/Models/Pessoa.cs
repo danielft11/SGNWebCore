@@ -13,8 +13,7 @@ namespace Domain.Models
 
         public string RG { get; set; }
 
-        [Required(ErrorMessage = "Campo obrigatório")]
-        public Sexo Sexo { get; set; }
+        public string Sexo { get; set; }
 
         [DisplayName("Celular Principal")]
         public string CelPrincipal { get; set; }
