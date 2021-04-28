@@ -1,4 +1,4 @@
-﻿@model EquipamentosAddEdit
+﻿@model Equipamento
 
 @{
     ViewData["Title"] = "Novo";
@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col-md-2 col-sm-2">
                 <div class="form-group">
-                    <label asp-for="TipoEquipamentoNome" class="control-label"></label>
+                    <label asp-for="TipoEquipamento.Nome" class="control-label"></label>
                     <select asp-for="TipoEquipamentoId" asp-items="@(new SelectList(Model.TiposEquipamentos, "Id", "Nome"))" class="form-control">
                         <option>Selecione</option>
                     </select>
@@ -59,7 +59,7 @@
             </div>
             <div class="col-md-3 col-sm-3">
                 <div class="form-group">
-                    <label asp-for="ClienteNome" class="control-label"></label>
+                    <label asp-for="Cliente.Nome" class="control-label"></label>
                     <div class="input-group">
                         <span class="input-group-btn">
                             <button id="btnBuscaCliente" class="btn btn-info">

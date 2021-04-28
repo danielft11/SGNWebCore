@@ -1,11 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Models
 {
     public class Equipamento : ModeloBase
     {
+        public Equipamento()
+        {
+
+        }
+        public Equipamento(IList<Cliente> clientes, IList<TipoEquipamento> tiposEquipamentos)
+        {
+            Clientes = clientes;
+            TiposEquipamentos = tiposEquipamentos;
+        }
+
         [Required(ErrorMessage = "Campo obrigatório")]
         [StringLength(100, ErrorMessage = "Este campo pode possuir no máximo 100 caracteres.")]
         public string Marca { get; set; }
@@ -30,5 +42,24 @@ namespace Domain.Models
         public int? ClienteId { get; set; }
 
         public Cliente Cliente { get; set; }
+
+        [NotMapped]
+        public IList<Cliente> Clientes { get; set; }
+
+        [NotMapped]
+        public IList<TipoEquipamento> TiposEquipamentos { get; set; }
+
+        public Equipamento AtualizarEquipamento(Equipamento model, Equipamento equipamento)
+        {
+            equipamento.Marca = model.Marca;
+            equipamento.Modelo = model.Modelo;
+            equipamento.NumSerie = model.NumSerie;
+            equipamento.Descricao = model.Descricao;
+            equipamento.TipoEquipamentoId = model.TipoEquipamentoId;
+            equipamento.ClienteId = model.ClienteId;
+            
+            return equipamento;
+
+        }
     }
 }

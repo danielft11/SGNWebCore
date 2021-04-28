@@ -25,8 +25,7 @@ namespace SGNWebCore.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var equipamentos = (await _equipamentoRepository.ObterEquipamentos())
-                .Select(e => e.ToEquipamentosGet());
+            var equipamentos = (await _equipamentoRepository.ObterEquipamentos());
             return Ok(equipamentos);
         }
 
@@ -38,7 +37,7 @@ namespace SGNWebCore.WebApi.Controllers
             if (equipamento == null)
                 return NotFound();
 
-            return Ok(equipamento.ToEquipamentosGet());
+            return Ok(equipamento);
         }
 
         [Route("getEquipamentoByCliente/{idCliente}")]
@@ -54,33 +53,23 @@ namespace SGNWebCore.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEquipamento([FromBody] EquipamentosAddEdit model) 
+        public async Task<IActionResult> AddEquipamento([FromBody] Equipamento model) 
         {
-            var cliente = new Cliente();
-
-            if (model.ClienteId != null)
-                cliente = await _clienteRepository.ObterClientePorIdAsync(model.ClienteId);
-
-            var tipoEquipamento = await _tipoEquipamentoRepository.ObterPorIdAsync(model.TipoEquipamentoId);
-
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var data = model.ToEquipamento();
-            _equipamentoRepository.Adicionar(data);
+            Equipamento equipamentoJaExistente = await _equipamentoRepository.ObterEquipamentoPorNumSerieAndIdCliente(model.NumSerie, model.ClienteId);
 
-            var equipamento = data.ToEquipamentosGet();
+            if (equipamentoJaExistente != null)
+                return await Task.FromResult(BadRequest("Este equipamento já está cadastrado."));
 
-            if (model.ClienteId != null)
-                equipamento.ClienteNome = cliente.Nome;
+            _equipamentoRepository.Adicionar(model);
 
-            equipamento.TipoEquipamentoNome = tipoEquipamento.Nome;
-
-            return CreatedAtRoute("GetEquipamentoById", new { equipamento.Id }, equipamento);
+            return CreatedAtRoute("GetEquipamentoById", new { model.Id }, model);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] EquipamentosAddEdit model)
+        public async Task<IActionResult> Update([FromBody] Equipamento model)
         {
             var equipamento = await _equipamentoRepository.ObterEquipamentoPorIdAsync(model.Id);
             var equipamentoAtualizado = new Equipamento();

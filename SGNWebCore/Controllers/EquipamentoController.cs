@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Domain.Models.ViewModels;
+using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SGNWebCore.HttpClients;
@@ -33,14 +33,14 @@ namespace SGNWebCore.Controllers
             var clientes = await _clienteApiClient.GetClientesAsync();
             var tiposEquipamentos = await _tiposEquipamentosApiClient.GetTiposDeEquipamentosAsync();
 
-            EquipamentosAddEdit equipamentosAddEdit = new EquipamentosAddEdit(clientes, tiposEquipamentos);
+            Equipamento equipamento = new Equipamento(clientes, tiposEquipamentos);
 
-            return View(equipamentosAddEdit);
+            return View(equipamento);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Novo(EquipamentosAddEdit equipamento)
+        public async Task<IActionResult> Novo(Equipamento equipamento)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +68,7 @@ namespace SGNWebCore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Detalhes(EquipamentosAddEdit equipamento) 
+        public async Task<IActionResult> Detalhes(Equipamento equipamento) 
         {
             if (ModelState.IsValid) 
             {
@@ -100,7 +100,7 @@ namespace SGNWebCore.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> NovoEquipamentoAjax([FromBody] EquipamentosAddEdit equipamento) 
+        public async Task<JsonResult> NovoEquipamentoAjax([FromBody] Equipamento equipamento) 
         {
             MessageResponse messageResponse;
 
@@ -129,7 +129,7 @@ namespace SGNWebCore.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> AtualizarEquipamentoAjax([FromBody] EquipamentosAddEdit equipamento) 
+        public async Task<JsonResult> AtualizarEquipamentoAjax([FromBody] Equipamento equipamento) 
         {
             MessageResponse messageResponse;
 

@@ -20,18 +20,18 @@ namespace SGNWebCore.HttpClients
             _accessor = accessor;
         }
 
-        public async Task<List<EquipamentosGet>> GetEquipamentosAsync() 
+        public async Task<List<Equipamento>> GetEquipamentosAsync() 
         {
             HttpResponseMessage resposta = await _httpClient.GetAsync($"equipamentos/");
             resposta.EnsureSuccessStatusCode();
-            return await resposta.Content.ReadAsAsync<List<EquipamentosGet>>();
+            return await resposta.Content.ReadAsAsync<List<Equipamento>>();
         }
 
-        public async Task<EquipamentosAddEdit> GetEquipamentosByIdAsync(int id)
+        public async Task<Equipamento> GetEquipamentosByIdAsync(int id)
         {
             HttpResponseMessage resposta = await _httpClient.GetAsync($"equipamentos/{id}");
             resposta.EnsureSuccessStatusCode();
-            return await resposta.Content.ReadAsAsync<EquipamentosAddEdit>();
+            return await resposta.Content.ReadAsAsync<Equipamento>();
         }
 
         public async Task<Equipamento> GetEquipamentosByClienteAsync(int idCliente)
@@ -41,13 +41,13 @@ namespace SGNWebCore.HttpClients
             return await resposta.Content.ReadAsAsync<Equipamento>();
         }
 
-        public async Task AddEquipamentoAsync(EquipamentosAddEdit equipamento)
+        public async Task AddEquipamentoAsync(Equipamento equipamento)
         {
             HttpResponseMessage resposta = await _httpClient.PostAsJsonAsync($"equipamentos", equipamento);
             resposta.EnsureSuccessStatusCode();
         }
 
-        public async Task UpdateEquipamentoAsync(EquipamentosAddEdit equipamento)
+        public async Task UpdateEquipamentoAsync(Equipamento equipamento)
         {
             HttpResponseMessage resposta = await _httpClient.PutAsJsonAsync($"equipamentos", equipamento);
             resposta.EnsureSuccessStatusCode();

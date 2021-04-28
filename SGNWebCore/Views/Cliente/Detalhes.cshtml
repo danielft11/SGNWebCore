@@ -1,4 +1,4 @@
-﻿@model SGNWebCore.WebApi.Models.ClienteAddEdit
+﻿@model Domain.Models.Cliente
 
 
 @{
@@ -192,7 +192,6 @@
         <div class="col-md-12 col-sm-12">
             <div class="modal fade bs-example-modal-lg" id="detalhes_ModalEquipamento" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                 <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="delModalEquipamentoLabel">Detalhes do equipamento</h4>
@@ -235,7 +234,6 @@
                         <div class="modal-footer">
                             <button id="botaoSalvarEquipamento" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" onclick="salvarEquipamento()">Salvar</button>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

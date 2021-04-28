@@ -12,5 +12,7 @@ namespace Data.Contracts
 
         Task<IList<Cliente>> ObterClientePorNomeAsync(string nome);
 
+        Task<Cliente> ObterClientePeloCPF(string cpf);
+
     }
 }

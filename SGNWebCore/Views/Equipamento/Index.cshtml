@@ -1,4 +1,4 @@
-﻿@model List<EquipamentosGet>
+﻿@model List<Equipamento>
 
 @{
     ViewData["Title"] = "Index";
@@ -24,18 +24,25 @@
                         </tr>
                         @foreach (var item in Model)
                         {
-                            <tr class="linhas">
-                                <td class="Id" style="white-space:nowrap;">@item.Id</td>
-                                <td style="white-space:nowrap;">@item.Marca</td>
-                                <td class="hidden-xs hidden-sm hidden-md" style="white-space:nowrap">@item.Modelo</td>
-                                <td class="hidden-xs hidden-sm hidden-md" style="white-space:nowrap">@item.NumSerie</td>
-                                <td class="hidden-xs hidden-sm hidden-md" style="white-space:nowrap">@item.TipoEquipamentoNome</td>
-                                <td class="hidden-xs hidden-sm hidden-md" style="white-space:nowrap">@item.ClienteNome</td>
-                                <td style="white-space:nowrap;">
-                                    @Html.ActionLink("Detalhes", "Detalhes", new { @item.Id }, new { @class = "btn btn-info btn-xs" }) |
-                                    <button id="index_botaoExcluir" data-id="@item.Id" class="btn btn-danger btn-xs botoes">Excluir</button>
-                                </td>
-                            </tr>
+                    <tr class="linhas">
+                        <td class="Id" style="white-space:nowrap;">@item.Id</td>
+                        <td style="white-space:nowrap;">@item.Marca</td>
+                        <td class="hidden-xs hidden-sm hidden-md" style="white-space:nowrap">@item.Modelo</td>
+                        <td class="hidden-xs hidden-sm hidden-md" style="white-space:nowrap">@item.NumSerie</td>
+                        <td class="hidden-xs hidden-sm hidden-md" style="white-space:nowrap">@item.TipoEquipamento.Nome</td>
+                        @if (item.Cliente == null)
+                        {
+                            <td class="hidden-xs hidden-sm hidden-md" style="white-space:nowrap"></td>
+                        }
+                        else
+                        {
+                            <td class="hidden-xs hidden-sm hidden-md" style="white-space:nowrap">@item.Cliente.Nome</td>
+                        }
+                        <td style="white-space:nowrap;">
+                            @Html.ActionLink("Detalhes", "Detalhes", new { @item.Id }, new { @class = "btn btn-info btn-xs" }) |
+                            <button id="index_botaoExcluir" data-id="@item.Id" class="btn btn-danger btn-xs botoes">Excluir</button>
+                        </td>
+                    </tr>
                         }
 
                     </tbody>

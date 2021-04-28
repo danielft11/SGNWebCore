@@ -33,5 +33,10 @@ namespace Domain.Models
 
         public Endereco Endereco { get; set; }
 
+        public bool ShouldSerializeEnderecoId()
+        {
+            return false;
+        }
+
     }
 }

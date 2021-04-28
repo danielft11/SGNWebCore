@@ -20,6 +20,11 @@ namespace Data.EF.Repositories
                 .ToListAsync();
         }
 
+        public async Task<Equipamento> ObterEquipamentoPorNumSerieAndIdCliente(string numSerie, int? idCliente) 
+        {
+            return await _db.FirstOrDefaultAsync(e => e.NumSerie == numSerie && e.ClienteId == idCliente);
+        }
+
         public async Task<IList<Equipamento>> ObterEquipamentos()
         {
             return await _db.

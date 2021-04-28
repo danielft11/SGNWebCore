@@ -11,7 +11,8 @@ namespace Data.Contracts
         Task<IList<Equipamento>> ObterPeloNumSerie(string nome);
         Task<IList<Equipamento>> ObterEquipamentos();
         Task<Equipamento> ObterEquipamentoPorIdAsync(int id);
-
         Task<IList<Equipamento>> ObterEquipamentosPorCliente(int idCliente);
+        Task<Equipamento> ObterEquipamentoPorNumSerieAndIdCliente(string numSerie, int? idCliente);
+
     }
 }

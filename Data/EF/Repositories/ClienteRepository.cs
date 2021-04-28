@@ -28,6 +28,11 @@ namespace Data.EF.Repositories
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
+        public async Task<Cliente> ObterClientePeloCPF(string cpf) 
+        {
+            return await _db.FirstOrDefaultAsync(c => c.CPF == cpf);
+        }
+
         public async Task<IList<Cliente>> ObterClientePorNomeAsync(string nome)
         {
             return await _db

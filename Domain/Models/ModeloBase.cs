@@ -12,5 +12,20 @@ namespace Domain.Models
 
         [DisplayName("Data de Alteração")]
         public DateTime DataAlteracao { get; set; } = DateTime.Now;
+
+        public bool ShouldSerializeId() 
+        {
+            return true;
+        }
+
+        public bool ShouldSerializeDataCriacao() 
+        {
+            return false;
+        }
+
+        public bool ShouldSerializeDataAlteracao() 
+        {
+            return false;
+        }
     }
 }

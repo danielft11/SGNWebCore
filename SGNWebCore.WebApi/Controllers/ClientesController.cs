@@ -2,7 +2,8 @@
 using Domain.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using SGNWebCore.WebApi.Models;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,14 +21,24 @@ namespace SGNWebCore.Controllers
             _clienteRepository = clienteRepository;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var clientes = (await _clienteRepository
-                .ObterTodosOsClientesAsync())
-                .Select(c => c.ToClienteGet());
+        [HttpGet("getAll/{searchTerm?}")]
+        public async Task<IActionResult> GetAll(string searchTerm)
+       {
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                var clientes = (await _clienteRepository
+                    .ObterTodosOsClientesAsync());
 
-            return Ok(clientes);
+                return Ok(clientes);
+            }
+            else
+            {
+                var clientes = (await _clienteRepository
+                    .ObterClientePorNomeAsync(searchTerm));
+
+                return Ok(clientes);
+            }
+
         }
 
         [HttpGet("{id}", Name = "GetClienteById")]
@@ -36,7 +47,7 @@ namespace SGNWebCore.Controllers
             var cliente = await _clienteRepository.ObterClientePorIdAsync(id);
 
             if (cliente == null)
-                return NotFound();
+                return await Task.FromResult(NotFound());
 
             return Ok(cliente);
         }
@@ -47,30 +58,32 @@ namespace SGNWebCore.Controllers
             var clientes = await _clienteRepository.ObterClientePorNomeAsync(nome);
 
             if (clientes == null)
-                return NotFound();
+                return await Task.FromResult(NotFound());
 
             return Ok(clientes);
         }
 
         [HttpPost]
-        public IActionResult AddCliente([FromBody] ClienteAddEdit model)
+        public async Task<IActionResult> AddCliente([FromBody] Cliente model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            Cliente clienteJaExistente = await _clienteRepository.ObterClientePeloCPF(model.CPF);
+
+            if (clienteJaExistente != null)
+                return await Task.FromResult(BadRequest("Este cliente já está cadastrado."));
+
             if (!string.IsNullOrEmpty(model.Sexo) && model.Sexo.Equals("Selecione"))
                 model.Sexo = null;
 
-            var data = model.ToCliente();
-            _clienteRepository.Adicionar(data);
+            _clienteRepository.Adicionar(model);
 
-            var cliente = data.ToClienteGet();
-
-            return CreatedAtRoute("GetClienteById", new { cliente.Id }, cliente);
+            return CreatedAtRoute("GetClienteById", new { model.Id }, model);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] ClienteAddEdit model)
+        public async Task<IActionResult> Update([FromBody] Cliente model)
         {
             var cliente = await _clienteRepository.ObterClientePorIdAsync(model.Id);
             var clienteAtualizado = new Cliente();
@@ -89,11 +102,11 @@ namespace SGNWebCore.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id) 
+        public async Task<IActionResult> Delete(int id)
         {
             var cliente = await _clienteRepository.ObterClientePorIdAsync(id);
 
-            if (cliente == null) 
+            if (cliente == null)
             {
                 ModelState.AddModelError("Id", "Cliente não localizado.");
                 return BadRequest(ModelState);

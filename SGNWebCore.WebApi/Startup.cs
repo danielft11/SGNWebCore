@@ -39,7 +39,7 @@ namespace SGNWebCore.WebApi
             {
                 options.AddPolicy(
                     name: "CorsPolicy",
-                    builder => 
+                    builder =>
                     {
                         builder.WithOrigins("http://localhost:4200")
                         .AllowAnyMethod()
@@ -93,7 +93,8 @@ namespace SGNWebCore.WebApi
                 };
             });
 
-            services.AddDbContext<IdentityContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SgnConnectionIdentity")));
+            services.AddDbContext<IdentityContext>(options
+                => options.UseSqlServer(Configuration.GetConnectionString("SgnConnectionIdentity")));
 
             services.AddDependencies(); // método de extensão da classe "ConfigServices" do projeto SGNWEBCore.DI
 

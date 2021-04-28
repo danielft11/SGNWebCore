@@ -27,17 +27,17 @@ namespace Data.EF.Repositories
         public void Adicionar(TEntity entity)
         {
             _db.Add(entity);
-            _ctx.SaveChanges();
+            _ctx.SaveChangesAsync();
         }
         public void Atualizar(TEntity entity)
         {
             _ctx.Update(entity);
-            _ctx.SaveChanges();
+            _ctx.SaveChangesAsync();
         }
         public void Deletar(TEntity entity)
         {
             _ctx.Remove(entity);
-            _ctx.SaveChanges();
+            _ctx.SaveChangesAsync();
         }
 
     }

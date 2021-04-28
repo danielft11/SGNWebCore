@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SGNWebCore.HttpClients;
 using SGNWebCore.Models;
-using SGNWebCore.WebApi.Models;
 using System;
 using System.Threading.Tasks;
 
@@ -35,7 +35,7 @@ namespace SGNWebCore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Novo(ClienteAddEdit cliente)
+        public async Task<IActionResult> Novo(Cliente cliente)
         {
             RemoveMascarasDosCampos(cliente);
 
@@ -59,7 +59,7 @@ namespace SGNWebCore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Detalhes(ClienteAddEdit cliente)
+        public async Task<IActionResult> Detalhes(Cliente cliente)
         {
             RemoveMascarasDosCampos(cliente);
 
@@ -122,7 +122,7 @@ namespace SGNWebCore.Controllers
 
         }
 
-        private static void RemoveMascarasDosCampos(ClienteAddEdit cliente)
+        private static void RemoveMascarasDosCampos(Cliente cliente)
         {
             if (!string.IsNullOrEmpty(cliente.CPF))
             {

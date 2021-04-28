@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using SGNWebCore.WebApi.Models;
+﻿using Domain.Models;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -20,35 +20,35 @@ namespace SGNWebCore.HttpClients
             //Teste commit.
         }
 
-        public async Task<IList<ClientesGet>> GetClientesAsync()
+        public async Task<IList<Cliente>> GetClientesAsync()
         {
-            HttpResponseMessage resposta = await _httpClient.GetAsync($"clientes/");
+            HttpResponseMessage resposta = await _httpClient.GetAsync($"clientes/getAll");
             resposta.EnsureSuccessStatusCode();
-            return await resposta.Content.ReadAsAsync<IList<ClientesGet>>();
+            return await resposta.Content.ReadAsAsync<IList<Cliente>>();
         }
 
-        public async Task<ClienteAddEdit> GetClienteByIdAsync(int id)
+        public async Task<Cliente> GetClienteByIdAsync(int id)
         {
             //AddBearerToken();
             HttpResponseMessage resposta = await _httpClient.GetAsync($"clientes/{id}");
             resposta.EnsureSuccessStatusCode();
-            return await resposta.Content.ReadAsAsync<ClienteAddEdit>();
+            return await resposta.Content.ReadAsAsync<Cliente>();
         }
 
-        public async Task<List<ClientesGet>> GetClienteByNameAsync(string nome)
+        public async Task<List<Cliente>> GetClienteByNameAsync(string nome)
         {
             HttpResponseMessage resposta = await _httpClient.GetAsync($"clientes/nome/{nome}");
             resposta.EnsureSuccessStatusCode();
-            return await resposta.Content.ReadAsAsync<List<ClientesGet>>();
+            return await resposta.Content.ReadAsAsync<List<Cliente>>();
         }
 
-        public async Task AddClienteAsync(ClienteAddEdit cliente)
+        public async Task AddClienteAsync(Cliente cliente)
         { 
             HttpResponseMessage resposta = await _httpClient.PostAsJsonAsync($"clientes", cliente);
             resposta.EnsureSuccessStatusCode();
         }
 
-        public async Task UpdateClienteAsync(ClienteAddEdit cliente)
+        public async Task UpdateClienteAsync(Cliente cliente)
         {
             HttpResponseMessage resposta = await _httpClient.PutAsJsonAsync($"clientes", cliente);
             resposta.EnsureSuccessStatusCode();

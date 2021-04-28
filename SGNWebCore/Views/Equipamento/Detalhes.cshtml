@@ -1,4 +1,4 @@
-﻿@model EquipamentosAddEdit
+﻿@model Equipamento
 
 @{
     ViewData["Title"] = "Detalhes";
@@ -8,15 +8,15 @@
 <div class="container-fluid meu_container">
     <div>
         <div class="cliente_imagem_titulo">
-            @if (Model.TipoEquipamentoNome.Equals("Computador"))
+            @if (Model.TipoEquipamento.Nome.Equals("Computador"))
             {
                 <img src="~/images/computer.png" style="width:100%" />
             }
-            @if (Model.TipoEquipamentoNome.Equals("Impressora"))
+            @if (Model.TipoEquipamento.Nome.Equals("Impressora"))
             {
                 <img src="~/images/impressora.png" style="width:100%" />
             }
-            @if (Model.TipoEquipamentoNome.Equals("Notebook"))
+            @if (Model.TipoEquipamento.Nome.Equals("Notebook"))
             {
                 <img src="~/images/notebook.png" style="width:100%" />
             }
@@ -71,7 +71,7 @@
                     <select asp-for="TipoEquipamentoId" asp-items="@ViewBag.TipoEquipamento" class="form-control">
                         <option>Selecione</option>
                     </select>
-                    <span asp-validation-for="TipoEquipamentoNome" class="text-danger"></span>
+                    <span asp-validation-for="TipoEquipamento.Nome" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-3 col-sm-3">
