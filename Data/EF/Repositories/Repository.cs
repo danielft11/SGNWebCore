@@ -40,5 +40,10 @@ namespace Data.EF.Repositories
             _ctx.SaveChangesAsync();
         }
 
+        public async Task<int> ObterTotalDeRegistros()
+        {
+            return await _db.CountAsync();
+        }
+
     }
 }

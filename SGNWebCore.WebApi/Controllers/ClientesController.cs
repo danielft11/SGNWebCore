@@ -117,6 +117,14 @@ namespace SGNWebCore.Controllers
 
         }
 
+        [HttpGet("obtertotalclientes")]
+        public async Task<IActionResult> ObterTotalDeClientes()
+        {
+            int total = await _clienteRepository.ObterTotalDeRegistros();
+
+            return Ok(total);
+        }
+
     }
 
 }

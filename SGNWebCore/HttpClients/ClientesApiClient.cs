@@ -60,6 +60,13 @@ namespace SGNWebCore.HttpClients
             resposta.EnsureSuccessStatusCode();
         }
 
+        public async Task<string> ObterTotalClientes() 
+        {
+            HttpResponseMessage resposta = await _httpClient.GetAsync($"clientes/obtertotalclientes");
+            resposta.EnsureSuccessStatusCode();
+            return await resposta.Content.ReadAsStringAsync();
+        }
+
         private void AddBearerToken()
         {
             var Token = _accessor.HttpContext.User.Claims.First(c => c.Type == "Token").Value;

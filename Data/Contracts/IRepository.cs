@@ -15,5 +15,7 @@ namespace Data.Contracts
         Task<IList<TEntity>> ObterTodosAsync();
 
         Task<TEntity> ObterPorIdAsync(object id);
+
+        Task<int> ObterTotalDeRegistros();
     }
 }

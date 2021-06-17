@@ -16,8 +16,8 @@ namespace SGNWebCore.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var clientes = await _ApiClient.GetClientesAsync();
-            ViewBag.TotalClientes = clientes.Count();
+            var total = await _ApiClient.ObterTotalClientes();
+            ViewBag.TotalClientes = int.Parse(total);
             return View();
         }
 
