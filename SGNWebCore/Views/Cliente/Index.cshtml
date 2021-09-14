@@ -26,6 +26,7 @@
         </div>
     </div>
 </form>
+
 @*Formulário de busca de clientes*@
 
 <div class="row">
@@ -70,6 +71,18 @@
                         }
                     </tbody>
                 </table>
+                <nav>
+                    <form asp-controller="Cliente" asp-action="Index" method="get">
+                        <ul class="pagination">
+                            @for (int i = 1; i <= ViewBag.QuantidadePaginas; i++)
+                            {
+                                <li>
+                                    <button class="page-link" name="pagina" value="@i">@i</button>
+                                </li>
+                            }
+                        </ul>
+                    </form>
+                </nav>
             </div>
         }
         else

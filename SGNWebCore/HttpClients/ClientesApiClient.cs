@@ -20,9 +20,9 @@ namespace SGNWebCore.HttpClients
             //Teste commit.
         }
 
-        public async Task<IList<Cliente>> GetClientesAsync()
+        public async Task<IList<Cliente>> GetClientesAsync(int? pagina)
         {
-            HttpResponseMessage resposta = await _httpClient.GetAsync($"clientes/getAll");
+            HttpResponseMessage resposta = await _httpClient.GetAsync($"clientes/getAll/pagina/{pagina.Value}");
             resposta.EnsureSuccessStatusCode();
             return await resposta.Content.ReadAsAsync<IList<Cliente>>();
         }

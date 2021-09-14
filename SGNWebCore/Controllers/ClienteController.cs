@@ -1,5 +1,4 @@
 ﻿using Domain.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SGNWebCore.HttpClients;
 using SGNWebCore.Models;
@@ -12,17 +11,20 @@ namespace SGNWebCore.Controllers
     {
         private readonly ClientesApiClient _ApiClient;
 
+        private readonly int TamanhoPagina = 2;
+        private int QuantidadeRegistros;
+
         public ClienteController(ClientesApiClient clientesApiClient)
         {
             _ApiClient = clientesApiClient;
         }
 
-        public async Task<IActionResult> Index(string nome)
+        public async Task<IActionResult> Index(int? pagina = 1)
         {
-            var clientes = await _ApiClient.GetClientesAsync();
+            var clientes = await _ApiClient.GetClientesAsync(pagina.Value);
 
-            if (!string.IsNullOrEmpty(nome))
-                clientes = await _ApiClient.GetClienteByNameAsync(nome);
+            QuantidadeRegistros = Convert.ToInt32(await _ApiClient.ObterTotalClientes());
+            ViewBag.QuantidadePaginas = Convert.ToInt32(Math.Ceiling(QuantidadeRegistros * 1M / TamanhoPagina));
 
             return View(clientes);
         }

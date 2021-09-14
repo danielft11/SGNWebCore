@@ -2,6 +2,8 @@
 using Domain.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SGNWebCore.Controllers
@@ -18,24 +20,13 @@ namespace SGNWebCore.Controllers
             _clienteRepository = clienteRepository;
         }
 
-        [HttpGet("getAll/{searchTerm?}")]
-        public async Task<IActionResult> GetAll(string searchTerm)
-       {
-            if (string.IsNullOrEmpty(searchTerm))
-            {
-                var clientes = (await _clienteRepository
-                    .ObterTodosOsClientesAsync());
+        [HttpGet("getAll/pagina/{pagina?}")]
+        public async Task<IActionResult> GetAll(int? pagina = 1)
+        {
+            var clientes = await _clienteRepository
+            .ObterTodosOsClientesAsync(pagina);
 
-                return Ok(clientes);
-            }
-            else
-            {
-                var clientes = (await _clienteRepository
-                    .ObterClientePorNomeAsync(searchTerm));
-
-                return Ok(clientes);
-            }
-
+            return Ok(clientes);
         }
 
         [HttpGet("{id}", Name = "GetClienteById")]

@@ -6,7 +6,7 @@ namespace Data.Contracts
 {
     public interface IClienteRepository : IRepository<Cliente>
     {
-        Task<IList<Cliente>> ObterTodosOsClientesAsync();
+        Task<IList<Cliente>> ObterTodosOsClientesAsync(int? pagina);
 
         Task<Cliente> ObterClientePorIdAsync(int? id);
 

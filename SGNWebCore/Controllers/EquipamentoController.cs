@@ -30,7 +30,7 @@ namespace SGNWebCore.Controllers
         [HttpGet]
         public async Task<IActionResult> Novo()
         {
-            var clientes = await _clienteApiClient.GetClientesAsync();
+            var clientes = await _clienteApiClient.GetClientesAsync(1);
             var tiposEquipamentos = await _tiposEquipamentosApiClient.GetTiposDeEquipamentosAsync();
 
             Equipamento equipamento = new Equipamento(clientes, tiposEquipamentos);
@@ -54,7 +54,7 @@ namespace SGNWebCore.Controllers
         public async Task<IActionResult> Detalhes(int id)
         {
             var equipamento = await _equipamentosApiClient.GetEquipamentosByIdAsync(id);
-            var clientes = await _clienteApiClient.GetClientesAsync();
+            var clientes = await _clienteApiClient.GetClientesAsync(1);
             var tiposEquipamentos = await _tiposEquipamentosApiClient.GetTiposDeEquipamentosAsync();
 
             ViewBag.Cliente = new SelectList(clientes, "Id", "Nome", equipamento.ClienteId);

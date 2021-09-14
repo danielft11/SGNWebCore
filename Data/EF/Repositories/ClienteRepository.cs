@@ -9,15 +9,21 @@ namespace Data.EF.Repositories
 {
     public class ClienteRepository : Repository<Cliente>, IClienteRepository
     {
+        private readonly int TamanhoPagina = 2;
+        private int PaginaAtual { get; set; }
+
         public ClienteRepository(SgnWebContext ctx) : base(ctx) { }
 
-        public async Task<IList<Cliente>> ObterTodosOsClientesAsync()
+        public async Task<IList<Cliente>> ObterTodosOsClientesAsync(int? pagina)
         {
+            PaginaAtual = pagina.Value;
+
             return await _db
                 .Include(e => e.Endereco)
-                .OrderBy(c => c.Nome)
+                .OrderBy(c => c.Nome).Skip(TamanhoPagina * (PaginaAtual - 1)).Take(TamanhoPagina)
                 .ToListAsync();
         }
+
 
         public async Task<Cliente> ObterClientePorIdAsync(int? id)
         {
